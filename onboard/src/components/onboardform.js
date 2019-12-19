@@ -16,7 +16,7 @@ let OnboardForm = ({
     touched,
     status
 }) => {
-    console.log("values", values);
+    // console.log("values", values);
     console.log("errors", errors);
     console.log("touched", touched);
 
@@ -32,10 +32,10 @@ let OnboardForm = ({
                 ...userData,
                 status
             ]);
-    }, [status]);
+    }, [status, userData]);
     return (
-        <div className="omboard-form">
-            <Form>
+        <div >
+            <Form className="onboard-form">
                 <label >
                     Name
                     <Field
@@ -88,6 +88,11 @@ let OnboardForm = ({
                         checked={values.tos}
                     />
                     <span className="checkmark" />
+                    {touched.tos && errors.tos && (
+                        <p className="errors">
+                            {errors.tos}
+                        </p>
+                    )}
                 </label>
                 <button type="submit">
                     Submit!
@@ -128,7 +133,8 @@ OnboardForm = withFormik({
         ),
         password: Yup.string().required(
             "PASSWORD IS MANDATORY"
-        )
+        ),
+        tos: Yup.boolean().oneOf([true], 'READING THE TOS IS REQUIRED'),
     }),
 
     handleSubmit(
