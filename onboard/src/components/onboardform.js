@@ -32,6 +32,7 @@ let OnboardForm = ({
                 ...userData,
                 status
             ]);
+        console.log('userData', userData)
     }, [status, userData]);
     return (
         <div >
@@ -125,13 +126,13 @@ OnboardForm = withFormik({
 
     // Declare shape and requirement of values object (form state )
     validationSchema: Yup.object().shape({
-        name: Yup.string().required(
+        name: Yup.string().min(5, "NAME MUST BE 5 CHARACTERS LONG").required(
             "NAME IS MANDATORY"
         ),
-        email: Yup.string().required(
+        email: Yup.string().matches(/^((?!waffle@syrup.com).)*$/, "NO SYRUP FOR YOU").email("EMAIL MUST BE IN THE FORM OF 'igor@gmail.com").required(
             "EMAIL IS MANDATORY"
         ),
-        password: Yup.string().required(
+        password: Yup.string().min(5, "PASSWORD MUST BE 5 CHARACTERS LONG").required(
             "PASSWORD IS MANDATORY"
         ),
         tos: Yup.boolean().oneOf([true], 'READING THE TOS IS REQUIRED'),
