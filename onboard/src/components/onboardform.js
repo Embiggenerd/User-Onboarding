@@ -51,54 +51,44 @@ let OnboardForm = ({
                             </p>
                         )}
                 </label>
-                <label htmlFor="size">
-                    Size
-            <Field
-                        id="size"
+                <label >
+                    Email
+                    <Field
+                        id="email"
                         type="text"
-                        name="size"
-                        placeholder="size"
+                        name="email"
+                        placeholder="email"
                     />
-                    {touched.size && errors.size && (
+                    {touched.email && errors.email && (
                         <p className="errors">
-                            {errors.size}
+                            {errors.email}
+                        </p>
+                    )}
+                </label>
+                <label >
+                    Password
+                    <Field
+                        id="password"
+                        type="password"
+                        name="password"
+                        placeholder="password"
+                    />
+                    {touched.password && errors.password && (
+                        <p className="errors">
+                            {errors.password}
                         </p>
                     )}
                 </label>
                 {/* For Fields that use input elements other thank <input /> use as to declare what HTML input to use for Field*/}
-                <Field
-                    as="select"
-                    className="food-select"
-                    name="diet"
-                >
-                    <option disabled>
-                        Choose an Option
-            </option>
-                    <option value="herbivore">
-                        Herbivore
-            </option>
-                    <option value="carnivore">
-                        Carnivore
-            </option>
-                    <option value="omnivore">
-                        Omnivore
-            </option>
-                </Field>
                 <label className="checkbox-container">
-                    Vaccinations
-            <Field
+                    Have you read the terms of service?
+                    <Field
                         type="checkbox"
-                        name="vaccinations"
-                        checked={values.vaccinations}
+                        name="tos"
+                        checked={values.tos}
                     />
                     <span className="checkmark" />
                 </label>
-                <Field
-                    as="textarea"
-                    type="text"
-                    name="notes"
-                    placeholder="Notes"
-                />
                 <button type="submit">
                     Submit!
           </button>
@@ -130,10 +120,14 @@ OnboardForm = withFormik({
 
     // Declare shape and requirement of values object (form state )
     validationSchema: Yup.object().shape({
-        name: Yup.string().required(),
-        // passing a string in required makes a custom inline error msg
-        size: Yup.string().required(
-            "SIZE IS MANDATORY"
+        name: Yup.string().required(
+            "NAME IS MANDATORY"
+        ),
+        email: Yup.string().required(
+            "EMAIL IS MANDATORY"
+        ),
+        password: Yup.string().required(
+            "PASSWORD IS MANDATORY"
         )
     }),
 
